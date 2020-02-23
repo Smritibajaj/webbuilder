@@ -16,7 +16,7 @@ for(var i = 0 ; i<data.themeFinder.length ; i++){
 }
 $('#data').on('click','.hi', function(){
     var dataId = ($(this).attr("id"));
-    window.location.href = "/web?"+dataId;
+    window.location.href = "./web.html?"+dataId;
 });
 });
 
