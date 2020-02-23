@@ -110,11 +110,13 @@
     <script type="text/javascript">
 
         const editor = grapesjs.init({
+
             // Indicate where to init the editor. You can also pass an HTMLElement
             container: '#gjs',
             // Get the content for the canvas directly from the element
             // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
             fromElement: true,
+            resizable: true,
             // Size of the editor
             height: '100%',
             width: 'auto',
@@ -134,20 +136,6 @@
                         run: function (em, sender) {
                             sender.set('active', false);
                             window.open('https://github.com/artf/grapesjs', '_blank');
-                        },
-                        stop: function () { }
-                    }, {
-                        id: 'undo',
-                        run: function (em, sender) {
-                            sender.set('active', false);
-                            em.get('UndoManager').undo();
-                        },
-                        stop: function () { }
-                    }, {
-                        id: 'redo',
-                        run: function (em, sender) {
-                            sender.set('active', false);
-                            em.get('UndoManager').redo();
                         },
                         stop: function () { }
                     }, {
@@ -223,24 +211,20 @@
                     id: 'commands',
                     el: '.panel__basic-actions',
                     buttons: [
-                        { id: 'select', className: 'fa fa-mouse-pointer', command: 'select-comp', attributes: { title: 'Select element' } },
-                        { id: 'undo', className: 'fa fa-undo icon-undo', command: 'undo', attributes: { title: 'Undo (CTRL/CMD + Z)' }, },
-                        { id: 'redo', className: 'fa fa-repeat icon-redo', command: 'redo', attributes: { title: 'Redo (CTRL/CMD + SHIFT + Z)' }, },
+                        { id: 'select', className: 'fa fa-mouse-pointer', command: 'sw-visibility', active: true, context: 'sw-visibility', attributes: { title: 'Select element' } },
+                        { id: 'undo', className: 'fa fa-undo icon-undo', command: 'core:undo', attributes: { title: 'Undo (CTRL/CMD + Z)' }, },
+                        { id: 'redo', className: 'fa fa-repeat icon-redo', command: 'core:redo', attributes: { title: 'Redo (CTRL/CMD + SHIFT + Z)' }, },
                         { id: 'clean-all', className: 'fa fa-trash icon-blank', command: 'clean-all', attributes: { title: 'Empty canvas' }, },
-                        { id: 'move', className: 'fa fa-arrows', command: 'move-comp', attributes: { title: 'Move elements' }, },
-                        { id: 'remove', className: 'fa fa-trash-o icon-rm', command: 'delete-comp', attributes: { title: 'Remove element' }, },
-                        { id: 'resize', className: 'fa fa-arrows-alt', command: 'resize-comp', attributes: { title: 'Resize' }, },
-                        { id: 'text', className: 'fa fa-font', command: 'text-comp', attributes: { title: 'Create text element' }, },
-                        { id: 'image', className: 'fa fa-picture-o', command: 'image-comp', attributes: { title: 'Create image element' }, },
-                        { id: 'var', className: 'fa fa-hashtag', command: 'insert-custom', attributes: { title: 'Some variable' }, options: { content: '{{ VAR11 }}', terminateAfterInsert: true, }, },
+                        { id: 'resize', className: 'fa fa-arrows-alt', command: 'fullscreen', attributes: { title: 'Resize' }, },
                         { id: 'export', className: 'fa fa-code', command: 'export-template', attributes: { title: 'View code' }, },
-                        { id: 'visibility', className: 'fa fa-eye', command: 'sw-visibility', active: true, context: 'sw-visibility', attributes: { title: 'View components' }, },
+                        { id: 'visibility', className: 'fa fa-eye', command: 'preview', attributes: { title: 'View components' }, },
                     ],
                 },
                 ],
             },
 
         });
+        editor.Commands.getAll();
         const editHtml = location.search.substring(1);
         editor.setComponents(data.themeFinder[editHtml].html);
 
