@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ckeditor": "^4.12.1",
+    "grapesjs-blocks-bootstrap4": "^0.1.20",
+    "grapesjs-plugin-ckeditor": "0.0.9",
+    "grapesjs-preset-newsletter": "^0.2.20",
     "grapesjs-preset-webpage": "^0.1.11"
   }
 }
